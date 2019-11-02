@@ -49,8 +49,6 @@ const getUsers = ()=> {
 const createUser = (user)=> {
   console.log("in store for user")
   return async(dispatch)=> {
-    const a = 10
-    console.log(a)
     const created = (await axios.post(`${API}/users`)).data
     dispatch(_createUser(created));
   }

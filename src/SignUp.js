@@ -35,11 +35,7 @@ class _SignUp extends React.Component{
 
 const mapStateToProps = ({ users}) => ({ users })
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    createUser: (user)=> dispatch(createUser(user))
-    }
-}
+const mapDispatchToProps = {createUser}
 
 const SignUp = connect(mapStateToProps, mapDispatchToProps)(_SignUp)
 
