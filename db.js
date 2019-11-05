@@ -189,7 +189,7 @@ Product.hasMany(Lineitem);
 Lineitem.belongsTo(Product);
 
 const sync = async () => {
-  await conn.sync({ force: true });
+  await conn.sync({ force: false });
   let users = [
     {name: 'Shruti', email: 'shruti@email.com', password: 'SHRUTI'},
     {name: 'Akshay', email: 'akshay@email.com', password: 'AKSHAY'},
