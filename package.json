@@ -3,17 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/officiallyakshay/grace-shopper-team-a.git"
-  },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/officiallyakshay/grace-shopper-team-a/issues"
-  },
-  "homepage": "https://github.com/officiallyakshay/grace-shopper-team-a#readme",
   "dependencies": {
     "axios": "^0.19.0",
     "express": "^4.17.1",
