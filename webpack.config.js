@@ -1,5 +1,5 @@
 module.exports = {
-  resolve: { modules: ['node_modules', 'src'] },
+  resolve: { modules: ['node_modules', 'src'], extension: ['', '.js', '.scss'] },
   module: {
     rules: [
       {
