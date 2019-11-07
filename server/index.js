@@ -8,9 +8,9 @@ const session = require('express-session');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const passport = require('passport');
 const router = require('express').Router();
-const volleyball = require('volleyball');
+// const volleyball = require('volleyball');
 
-app.use(volleyball);
+// app.use(volleyball);
 
 app.use(express.json());
 app.use('/dist', express.static(path.join(__dirname, '../dist')));
