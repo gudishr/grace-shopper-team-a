@@ -1,5 +1,4 @@
 module.exports = {
-  // devtool: 'sourcemap',
   module: {
     rules: [
       {
