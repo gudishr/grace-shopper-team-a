@@ -30,8 +30,8 @@
   },
   "scripts": {
     "postinstall": "npm run webpack",
-    "webpack": "webpack",
-    "start:dev": "nodemon server/index.js --ignore dist/ --ignore src/ & npm run webpack --watch --mode=development"
+    "webpack": "webpack --watch --mode=development",
+    "start:dev": "nodemon server/index.js --ignore dist/ --ignore src/ & npm run webpack"
   },
   "babel": {
     "presets": [
