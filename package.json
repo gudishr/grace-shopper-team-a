@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start:dev": "npm run webpack:dev & nodemon ./server/index.js --ignore src/",
-    "webpack": "webpack",
+    "webpack": "webpack --mode=production",
     "webpack:dev": "npm run webpack -- --watch --mode=development",
     "start": "node index.js",
     "build": "npm run webpack"
