@@ -169,6 +169,10 @@ const OrderDetail = conn.define('orderDetail', {
   },
   quantity: {
     type: INTEGER
+  },
+  imageURL: STRING,
+  name: {
+    type: STRING
   }
 });
 

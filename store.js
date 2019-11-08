@@ -19,6 +19,9 @@ const SET_LINEITEM ='SET_LINEITEM';
 const CREATE_LINE_ITEM ='CREATE_LINE_ITEM';
 const UPDATE_CART = 'UPDATE_CART';
 
+const CREATE_ORDER = 'CREATE_ORDER';
+
+
 //Action Creators
 
 const setProducts = (products)=> ({ type: SET_PRODUCTS, products });
@@ -32,6 +35,7 @@ const createCart = cart => ({ type: CREATE_CART, cart })
 const destroyCart = cart => ({ type: DESTROY, cart });
 const _createLineItem = (lineitem) => ({ type: CREATE_LINE_ITEM, lineitem})
 const update = cart => ({ type: UPDATE_CART, cart });
+const _createOrder = (order) => ({ type: CREATE_ORDER, order });
 
 //Thunks
 
@@ -102,7 +106,12 @@ const updateThunks = (id, method) => async dispatch => {
   dispatch(update(cart));
 };
 
-export { getProducts, getUsers, createUser, destroyProduct, onLogin, setCartThunks, createCartThunks, destroyCartThunks, updateThunks, createLineItem }
+const createOrder = (payload) => async dispatch => {
+  const order = (await axios.post(`${API}/orders`, payload)).datal;
+  dispatch(_createOrder(order));
+}
+
+export { getProducts, getUsers, createUser, destroyProduct, onLogin, setCartThunks, createCartThunks, destroyCartThunks, updateThunks, createLineItem, createOrder }
 
 //Reducers
 
@@ -138,8 +147,10 @@ const store = createStore(
   cart: (state = [], action) => {
     switch (action.type) {
       case SET_CART:
+        console.log('state', state)
           return action.cart;
       case CREATE_CART:
+        console.log('action', action)
           return [...state, action.cart];
       case DESTROY:
           return state.filter(cart => cart.id !== action.cart);
@@ -154,6 +165,13 @@ const store = createStore(
     switch (action.type) {
       case CREATE_LINE_ITEM:
         return [...state, action.cart];
+    }
+    return state;
+  },
+  orders: (state = [], action) => {
+    switch (action.type) {
+      case CREATE_ORDER:
+        return [...state, action.order];
     }
     return state;
   }

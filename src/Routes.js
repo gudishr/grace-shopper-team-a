@@ -4,6 +4,7 @@ import Home from './Home';
 import Products from './Products';
 import SingleProduct from './SingleProduct';
 import Cart from './Cart';
+import MyStoreCheckout from './MyStoreCheckout';
 
 class Routes extends Component {
   render() {
@@ -13,6 +14,7 @@ class Routes extends Component {
         <Route exact path='/products' component = { Products } />
         <Route path='/products/:id' component = { SingleProduct } />
         <Route path='/cart' component = { Cart } />
+        <Route path='/checkout' component = { MyStoreCheckout } />
       </Switch>
     );
   }

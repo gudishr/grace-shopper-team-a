@@ -4,6 +4,8 @@ import Routes from './Routes';
 import { connect } from 'react-redux';
 import { SignIn } from './SignIn';
 import { getUsers, getProducts } from '../store';
+import { StripeProvider } from 'react-stripe-elements';
+import MyStoreCheckout from './MyStoreCheckout';
 
 class App extends React.Component {
   componentDidMount() {
@@ -16,10 +18,15 @@ class App extends React.Component {
         < SignIn />
         < Nav />
         < Routes />
+
+        <StripeProvider apiKey ="pk_test_GQHHpXRRAorsIxR9ykssVpzJ00D9ki3Q5N">
+          < MyStoreCheckout />
+        </StripeProvider>
+
       </div>
     );
-  }
-}
+  };
+};
 
 const mapDispatchToAppProps = {
   getUsers: getUsers,

@@ -3,7 +3,7 @@ const path = require('path');
 const app = express();
 const db = require('../db');
 const { conn, models: { User, Guest, Product, Payment, Order, OrderDetail, Cart, Lineitem } } = require('../db');
-const port = process.env.PORT || 3005;
+const port = process.env.PORT || 4000;
 const session = require("express-session");
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const passport = require('passport');
@@ -60,25 +60,24 @@ app.get('/api/cart', async ( req, res, next ) => {
 
 app.post('/api/cart', async (req, res, next) => {
   try {
-    const item = await Cart.create(req.body)
-    res.status(201).send(item)
+    const item = await Lineitem.create(req.body)
+    const product = await Product.findByPk(item.productId)
+    const asmrtist = Object.assign({product}, item)
+    res.status(201).json({...item, product})
   }
   catch(ex) {
     next(ex)
   }
 });
 
-// app.post('/api/cart', async ( req, res, next ) => {
-//   try {
-//     const product = await Product.findAll({ where: { id: req.body.cartId }})
-//     req.body.cartId = product[0].id
-//     const cart = await Cart.create(req.body, { include: [ Product ] });
-//     res.send(cart);
-//   }
-//   catch(ex) {
-//     next(ex);
-//   }
-// });
+app.get('/api/orders', async(req, res, next) => {
+  res.send(await OrderDetail.findAll())
+})
+
+app.post('/api/orders', async(req, res, next) => {
+  const order = await OrderDetail.create(req.body)
+  res.send(order);
+})
 
 app.put('/api/cart', async ( req, res, next ) => {
   try {
@@ -102,13 +101,25 @@ app.put('/api/cart', async ( req, res, next ) => {
 
 app.delete('/api/cart/:id', async ( req, res, next ) => {
   try {
-    await Cart.destroy({ where: {id: req.params.id} });
+    await Lineitem.destroy({ where: {id: req.params.id} });
     res.sendStatus(201);
   }
   catch(ex) {
     next(ex);
   }
 });
+
+//Checkout
+
+// app.get('/api/checkout', async ( req, res, next ) => {
+//   try {
+//     const cart = await Lineitem.findAll( { include: [ Product ] });
+//     res.send(cart);
+//   }
+//   catch(ex) {
+//     next(ex)
+//   }
+// });
 
 db.sync()
   .then(() => {
