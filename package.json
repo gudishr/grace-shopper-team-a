@@ -8,7 +8,7 @@
   "main": "index.js",
   "scripts": {
     "postinstall": "npm run webpack",
-    "webpack": "webpack --watch --mode=development",
+    "webpack": "webpack --watch --mode=development --display-error-details",
     "start:dev": "nodemon server/index.js --ignore dist/ --ignore src/ & npm run webpack",
     "start": "node server/index.js"
   },
