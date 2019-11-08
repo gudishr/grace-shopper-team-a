@@ -13,6 +13,7 @@ const router = require('express').Router();
 // app.use(volleyball);
 
 app.use(express.json());
+app.use(express.urlencoded({extended: true}))
 app.use('/dist', express.static(path.join(__dirname, '../dist')))
 
 app.get('/', (req, res, next)=> {
