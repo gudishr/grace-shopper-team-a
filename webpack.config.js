@@ -1,11 +1,19 @@
+const path = require('path');
+
 module.exports = {
-  resolve: { modules: ['node_modules', 'src']},
+  entry: './src/index.js',
+  output: {
+    filename: 'app.js'
+  },
   module: {
     rules: [
       {
         test: /\.js$/,
         loader: 'babel-loader',
-        exclude: /node_modules/
+        exclude: /node_modules/,
+        options: {
+          presets: ['@babel/preset-env', '@babel/react']
+        }
       }
     ]
   }
