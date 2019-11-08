@@ -1,6 +1,9 @@
 {
   "name": "grace-shopper-playback",
   "version": "1.0.0",
+  "engines": {
+    "node" : "10.10.0"
+  },
   "description": "Playback",
   "main": "index.js",
   "scripts": {
