@@ -5,10 +5,10 @@ import { connect } from 'react-redux';
 import { getUsers, getProducts } from '../store';
 
 class App extends React.Component {
-  componentDidMount() {
-    this.props.getUsers();
-    this.props.getProducts();
-  }
+  // componentDidMount() {
+  //   this.props.getUsers();
+  //   this.props.getProducts();
+  // }
   render() {
     return (
       <div>
