@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { getProducts } from '../store';
+import { getProducts } from './redux/store.js';
 
 const { Component } = React;
 
