@@ -2,7 +2,7 @@ import React from 'react';
 import Nav from './Nav';
 import Routes from './Routes';
 import { connect } from 'react-redux';
-import { getUsers, getProducts } from '../store';
+import { getUsers, getProducts } from './redux/store.js';
 
 class App extends React.Component {
   componentDidMount() {

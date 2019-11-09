@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { getProducts, createCartThunks } from '../store';
+import { getProducts, createCartThunks } from './redux/store.js';
 const { Component } = React;
 
 class _SingleProduct extends Component {
@@ -21,7 +21,7 @@ async create(ev) {
 }
 async componentDidMount() {
   const {data} = await axios.get(`/api/products/${this.props.match.params.id}`)
-  this.setState({product: data}) 
+  this.setState({product: data})
 }
 render() {
   const { product } = this.state;
@@ -30,7 +30,7 @@ render() {
       <div id='flex'>
         {
           <ul>
-            <li key='img'>{product.imageURL}</li>
+            <li key='img'><img src ={product.imageURL} /></li>
             <li key='name'>{product.name}</li>
             <li key='genre'>{product.genre}</li>
             <li key='price'>{product.price}</li>

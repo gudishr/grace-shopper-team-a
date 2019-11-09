@@ -1,8 +1,8 @@
 import React from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { getUsers, updateUserThunks, createUser } from '../store';
-const { Component } = React;
+import { getUsers, updateUserThunks, createUser } from './redux/store.js';
+import { Component } from 'React';
 
 class _SingleUser extends Component {
 constructor(props) {
@@ -17,7 +17,11 @@ constructor(props) {
 }
 onChange(ev) {
   this.setState({ [ev.target.name] : ev.target.value });
-} 
+<<<<<<< HEAD
+}
+=======
+}
+>>>>>>> otrigueros28-finalFileSplit
 async updateUser(ev) {
   ev.preventDefault();
   const payload = {name: this.state.name, email: this.state.email}
@@ -26,7 +30,11 @@ async updateUser(ev) {
 }
 async componentDidMount() {
   const {data} = await axios.get(`/api/users/${this.props.match.params.id}`)
-  this.setState({user: data, name: data.name, email: data.email}) 
+<<<<<<< HEAD
+  this.setState({user: data, name: data.name, email: data.email})
+=======
+  this.setState({user: data, name: data.name, email: data.email})
+>>>>>>> otrigueros28-finalFileSplit
 }
 render() {
   const { user } = this.state;
@@ -37,7 +45,11 @@ render() {
         {
           <form>
             {user.name}<input name='name' value={this.state.name} onChange = { onChange } /> <br/>
-            {user.email}<input name='email' value={this.state.email} onChange = { onChange } /> 
+<<<<<<< HEAD
+            {user.email}<input name='email' value={this.state.email} onChange = { onChange } />
+=======
+            {user.email}<input name='email' value={this.state.email} onChange = { onChange } />
+>>>>>>> otrigueros28-finalFileSplit
             <button onClick = { updateUser } >Edit</button>
           </form>
         }
