@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { onLogin } from '../store'
+import { onLogin } from './redux/store.js';
 
 class _Login extends React.Component{
   constructor(){
