@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import { Link } from 'react-router-dom';
-import { getUsers, updateUserThunks } from '../store';
+import { getUsers, updateUserThunks } from './redux/store.js';
 
 class Users extends React.Component {
   constructor() {
@@ -18,7 +18,7 @@ class Users extends React.Component {
             <Link to={`/users/${u.id}`}>{u.name}</Link><br/>
             {u.email}
             </li>)
-        } 
+        }
       </ul>
     )
   }

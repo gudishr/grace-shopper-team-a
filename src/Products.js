@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { getProducts } from '../store';
+import { getProducts } from './redux/store.js';
 
 const { Component } = React;
 
@@ -15,20 +15,22 @@ class _Products extends Component {
  render() {
    const {products} = this.props
    return (
-     <div>
+     <div id='flexprodgrandparent'>
        <ul>
          {
            products.map( product => {
              return (
-               <div key={product.id} id='flex'>
+               <div key={product.id} id='flexprodparent'>
                   {/* <Link to={`/products/${product.id}`} activeclassname="active"> */}
+                  <div id='flexprodchild'>
 
                   <li key='img'><img src ={product.imageURL}></img></li>
 
                   {/* </Link> */}
                   <Link to={`/products/${product.id}`} activeclassname="active"><h1 key='name'>{product.name}</h1></Link>
-                  <li key='genre'>{product.genre}</li>
-                  <li key='price'>{product.price}</li>
+                  <li id='genre'>{product.genre}</li>
+                  <li id='price'>${product.price}</li>
+                  </div>
                </div>
              );
            })

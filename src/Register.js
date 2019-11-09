@@ -1,6 +1,6 @@
-import React from 'react'
-import { connect } from 'react-redux'
-import { createUser } from '../store'
+import React from 'react';
+import { connect } from 'react-redux';
+import { createUser } from './redux/store.js';
 
 class _Register extends React.Component{
   constructor(){
@@ -21,7 +21,7 @@ class _Register extends React.Component{
   onSubmit(ev){
     ev.preventDefault()
     this.props.createUser({...this.state})
-    
+
   }
 
   render(){
@@ -35,7 +35,7 @@ class _Register extends React.Component{
           <div><label>Email Address</label><input name="email" type="email" placeholder="enter email address" value={ email } onChange={ onChange } required/></div>
           <div><label>Choose a password</label><input name="password" type="password" placeholder="choose a password" value={ password } onChange={ onChange } required/></div>
           <button className="onRegister">Register</button>
-        </form> 
+        </form>
       </div>
     );
   }

@@ -9,7 +9,6 @@ import axios from 'axios';
 const SET_PRODUCTS = 'SET_PRODUCTS';
 const SET_USERS = 'SET_USERS';
 const CREATE_USER = 'CREATE_USER';
-const UPDATE_USER = 'UPDATE_USER';
 const DESTROY_PRODUCT = 'DESTROY_PRODUCT';
 const SET_LOGIN_ERROR = "SET_LOGIN_ERROR"
 const SET_LOGIN_SUCCESS = "SET_LOGIN_SUCCESS"
@@ -20,12 +19,14 @@ const SET_LINEITEM ='SET_LINEITEM';
 const CREATE_LINE_ITEM ='CREATE_LINE_ITEM';
 const UPDATE_CART = 'UPDATE_CART';
 
+const CREATE_ORDER = 'CREATE_ORDER';
+
+
 //Action Creators
 
 const setProducts = (products)=> ({ type: SET_PRODUCTS, products });
 const setUsers = (users)=> ({ type: SET_USERS, users });
-const _createUser = (user)=> ({ type: CREATE_USER, user });
-const updateUser = (user) => ({ type: UPDATE_USER, user })
+const _createUser = (user)=> ({ type: CREATE_USER, user })
 const _destroyProduct = (product)=> ({ type: DESTROY_PRODUCT, product});
 const setLoginError = (err) => ({ type: SET_LOGIN_ERROR, err });
 const setLoginSuccess = (user) => ({ type: SET_LOGIN_SUCCESS, user });
@@ -34,6 +35,7 @@ const createCart = cart => ({ type: CREATE_CART, cart })
 const destroyCart = cart => ({ type: DESTROY, cart });
 const _createLineItem = (lineitem) => ({ type: CREATE_LINE_ITEM, lineitem})
 const update = cart => ({ type: UPDATE_CART, cart });
+const _createOrder = (order) => ({ type: CREATE_ORDER, order });
 
 //Thunks
 
@@ -51,17 +53,12 @@ const getUsers = ()=> {
   }
 };
 
-const createUser = (user)=> {
-  return async(dispatch) => {
-    const created = (await axios.post('/api/users', user)).data
-    dispatch(_createUser(created))
+const createUser = ()=> {
+  return async(dispatch)=> {
+    const created = (await axios.post(`${API}/users`, user)).data;
+    dispatch(_createUser(created));
   }
-}
-
-const updateUserThunks = (id, payload) => async dispatch => {
-  const user = (await axios.put(`/api/users`, {id: id, ...payload})).data;
-  dispatch(updateUser(user));
-}; 
+};
 
 const destroyProduct = (product)=> {
  return async(dispatch)=> {
@@ -72,7 +69,7 @@ const destroyProduct = (product)=> {
 
 const onLogin = (user) => {
   return async(dispatch)=> {
-    await axios.post(`/api/login`, user)
+    await axios.post(`${API}/login`, user)
     .then(response => {
       return dispatch(setLoginSuccess(response.data));
     })
@@ -109,7 +106,12 @@ const updateThunks = (id, method) => async dispatch => {
   dispatch(update(cart));
 };
 
-export { getProducts, getUsers, createUser, updateUserThunks, destroyProduct, onLogin, setCartThunks, createCartThunks, destroyCartThunks, updateThunks, createLineItem }
+const createOrder = (payload) => async dispatch => {
+  const order = (await axios.post(`${API}/orders`, payload)).datal;
+  dispatch(_createOrder(order));
+}
+
+export { getProducts, getUsers, createUser, destroyProduct, onLogin, setCartThunks, createCartThunks, destroyCartThunks, updateThunks, createLineItem, createOrder }
 
 //Reducers
 
@@ -124,16 +126,13 @@ const store = createStore(
       }
       return state;
     },
-    user: (state = [], action)=> {
+    users: (state = [], action)=> {
       if(action.type === SET_USERS) {
         return action.users
       }
       if (action.type === CREATE_USER) {
-        return [...state, action.user];
-      }
-      if (action.type === UPDATE_USER) {
-        return state.map(user => user.id === action.user.id ? action.user : user) 
-      }
+      return [...state, action.user];
+    }
     return state;
   },
   login: (state = [], action)=> {
@@ -148,8 +147,10 @@ const store = createStore(
   cart: (state = [], action) => {
     switch (action.type) {
       case SET_CART:
+        console.log('state', state)
           return action.cart;
       case CREATE_CART:
+        console.log('action', action)
           return [...state, action.cart];
       case DESTROY:
           return state.filter(cart => cart.id !== action.cart);
@@ -164,6 +165,13 @@ const store = createStore(
     switch (action.type) {
       case CREATE_LINE_ITEM:
         return [...state, action.cart];
+    }
+    return state;
+  },
+  orders: (state = [], action) => {
+    switch (action.type) {
+      case CREATE_ORDER:
+        return [...state, action.order];
     }
     return state;
   }
