@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { getProducts, createCartThunks } from '../store';
+import { getProducts, createCartThunks } from './redux/store.js';
 const { Component } = React;
 
 class _SingleProduct extends Component {
@@ -31,7 +31,7 @@ render() {
       <div id='flexprodparent'>
         {
           <ul>
-            <li key='img'><img src={product.imageURL}></img></li>
+            <li key='img'><img src ={product.imageURL} /></li>
             <li key='name'>{product.name}</li>
             <li id='genre'>{product.genre}</li>
             <li id='price'>${product.price}</li>

@@ -1,16 +1,9 @@
 const express = require('express');
 const path = require('path');
 const app = express();
-const db = require('../db');
-const { conn, models: { User, Guest, Product, Payment, Order, OrderDetail, Cart, Lineitem } } = require('../db');
-const port = process.env.PORT || 4000;
-const session = require("express-session");
-const SequelizeStore = require('connect-session-sequelize')(session.Store);
-const passport = require('passport');
-const router = require("express").Router();
-
-
-
+const db = require('./DB/db');
+const port = process.env.PORT || 3005;
+const routes =  require('./router');
 
 app.use(express.json());
 app.use('/dist', express.static(path.join(__dirname, '../dist')));
@@ -18,96 +11,7 @@ app.get('/', (req, res, next)=> {
   res.sendFile(path.join(__dirname, '../index.html'));
 });
 
-app.get('/api/users', async (req, res, next) => {
-  try {
-    const users = await User.findAll();
-    res.send(users)
-  }
-  catch(ex) {
-    next(ex)
-  }
-});
-
-app.get('/api/products', async (req, res, next) => {
-  try {
-    const products = await Product.findAll();
-    res.send(products)
-  }
-  catch(ex) {
-    next(ex)
-  }
-});
-
-app.get('/api/products/:id', async (req, res, next) => {
-  try {
-    const products = await Product.findByPk(req.params.id);
-    res.send(products)
-  }
-  catch(ex) {
-    next(ex)
-  }
-});
-
-app.get('/api/cart', async ( req, res, next ) => {
-  try {
-    const cart = await Lineitem.findAll( { include: [ Product ] });
-    res.send(cart);
-  }
-  catch(ex) {
-    next(ex)
-  }
-});
-
-app.post('/api/cart', async (req, res, next) => {
-  try {
-    const item = await Lineitem.create(req.body)
-    const product = await Product.findByPk(item.productId)
-    const asmrtist = Object.assign({product}, item)
-    res.status(201).json({...item, product})
-  }
-  catch(ex) {
-    next(ex)
-  }
-});
-
-app.get('/api/orders', async(req, res, next) => {
-  res.send(await OrderDetail.findAll())
-})
-
-app.post('/api/orders', async(req, res, next) => {
-  const order = await OrderDetail.create(req.body)
-  res.send(order);
-})
-
-app.put('/api/cart', async ( req, res, next ) => {
-  try {
-    const instance = await Lineitem.findByPk(req.body.id, {include: [Product]});
-    if (req.body.method === 'add') {
-      instance.quantity = ++instance.quantity;
-    }
-    if (req.body.method === 'subtract' && instance.quantity > 1) {
-      instance.quantity = --instance.quantity;
-    }
-    instance.save();
-
-    res.send(instance);
-  }
-  catch(ex) {
-    next(ex)
-  }
-});
-
-//cartID to send in for validation
-
-app.delete('/api/cart/:id', async ( req, res, next ) => {
-  try {
-    await Lineitem.destroy({ where: {id: req.params.id} });
-    res.sendStatus(201);
-  }
-  catch(ex) {
-    next(ex);
-  }
-});
+app.use('/', routes);
 
 //Checkout
 
@@ -124,91 +28,4 @@ app.delete('/api/cart/:id', async ( req, res, next ) => {
 db.sync()
   .then(() => {
 app.listen(port, ()=> console.log(`listening on port ${port}`));
-})
-
-
-//these lines serialize the user
-passport.serializeUser((user, done) => done(null, user.id))
-passport.deserializeUser(async (id, done) => {
-  try {
-    const user = await db.models.user.findById(id)
-    done(null, user)
-  } catch (err) {
-    done(err)
-  }
-})
-
-
-///using connect-sess-seq to create model for db to log sessions into the store fluidly
-const ourStore =  new SequelizeStore({ db: conn });
-
-//middleware for the store
-app.use(session({
-  secret: 'playback4321',
-  store: ourStore,
-  resave: false,
-  proxy: true
-}));
-
-///sync sessions to store
-ourStore.sync();
-
-//passport middleware to create sessions
-app.use(passport.initialize());
-app.use(passport.session());
-app.use(express.urlencoded({extended: true}))
-
-////post route, first finds user with email => if not valid email, err, => if email exits but password doesnt match, err => both match, session logs in
-router.post('/api/login', (req, res, next) => {
-  User.findOne({where:{email: req.body.email}})
-    .then(user => {
-      if (!user){
-        res.status(401).send('Wrong email and/or password');
-      } else if (!user.correctPassword(req.body.password)){
-        req.status(401).send('Wrong email and/or password');
-      } else {
-        req.login(user, err => (err ? next(err) : res.json(user)));
-        res.redirect('/api/products');
-      }
-    })
-    .catch(next)
-  });
-
-////for sign up once we have it, create user with body info, once created, logs in. if not created because email exists in db, error occurs
-router.post('/api/signup', (req, res, next)=>{
-  User.create(req.body)
-    .then(user => {
-      req.login(user, err => (err ? next(err) : res.json(user)))
-    })
-    .catch(err => {
-      if(err.name === 'SequelizeUniqueConstraintError'){
-        res.status(401).send('User already xists');
-      } else {
-        next(err)
-      }
-    })
-})
-
-////logout button link, deletes session and sends back to home
-router.post('/api/logout', (req, res, next) => {
-  req.logout()
-  req.session.destroy()
-  res.redirect('/api/')
-})
-
-app.get('/api/me', (req, res, next)=>{
-  res.json(req.user);
-})
-
-
-/*
-app.get('/login', (req, res, next) => {
-  passport.authenticate('local', function(err, user, info) {
-    if (err) { return next(err); }
-    if (!user) { return res.redirect('/login'); }
-    req.logIn(user, function(err) {
-      if (err) { return next(err); }
-      return res.redirect('/api/products');
-    });
-  })(req, res, next);
-});*/
+});
