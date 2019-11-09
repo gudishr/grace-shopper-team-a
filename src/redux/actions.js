@@ -12,6 +12,8 @@ const SET_LINEITEM ='SET_LINEITEM';
 const CREATE_LINE_ITEM ='CREATE_LINE_ITEM';
 const UPDATE_CART = 'UPDATE_CART';
 
+const CREATE_ORDER = 'CREATE_ORDER';
+
 //Action Creators
 
 const setProducts = (products)=> ({ type: SET_PRODUCTS, products });
@@ -26,5 +28,7 @@ const destroyCart = cart => ({ type: DESTROY, cart });
 const _createLineItem = (lineitem) => ({ type: CREATE_LINE_ITEM, lineitem})
 const update = cart => ({ type: UPDATE_CART, cart });
 
-export { setProducts, setUsers, _createUser, _destroyProduct, setLoginError, setLoginSuccess,setCart, createCart, destroyCart, _createLineItem, update, SET_PRODUCTS, DESTROY_PRODUCT, SET_USERS, CREATE_USER, SET_LOGIN_SUCCESS, SET_LOGIN_ERROR, SET_CART, CREATE_CART, DESTROY, UPDATE_CART, CREATE_LINE_ITEM, SET_LINEITEM
+const _createOrder = (order) => ({ type: CREATE_ORDER, order });
+
+export { setProducts, setUsers, _createUser, _destroyProduct, setLoginError, setLoginSuccess,setCart, createCart, destroyCart, _createLineItem, update, _createOrder, SET_PRODUCTS, DESTROY_PRODUCT, SET_USERS, CREATE_USER, SET_LOGIN_SUCCESS, SET_LOGIN_ERROR, SET_CART, CREATE_CART, DESTROY, UPDATE_CART, CREATE_LINE_ITEM, SET_LINEITEM, CREATE_ORDER
 };

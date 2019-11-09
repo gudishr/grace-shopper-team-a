@@ -15,6 +15,18 @@ app.get('/', (req, res, next)=> {
 
 app.use('/', routes);
 
+//Checkout
+
+// app.get('/api/checkout', async ( req, res, next ) => {
+//   try {
+//     const cart = await Lineitem.findAll( { include: [ Product ] });
+//     res.send(cart);
+//   }
+//   catch(ex) {
+//     next(ex)
+//   }
+// });
+
 db.sync()
   .then(() => {
 app.listen(port, ()=> console.log(`listening on port ${port}`));

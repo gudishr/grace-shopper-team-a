@@ -1,7 +1,11 @@
 <html>
 <head>
+<<<<<<< HEAD
   <script src="/dist/main.js" defer></script>
   <title>Playback</title>
+=======
+  <script src="https://js.stripe.com/v3/"></script>
+>>>>>>> e4f6e349e6241e78bfffc45da2dd7e2c14c5ea0b
   <style>
     body {
        font-family: impact;
@@ -9,6 +13,20 @@
        -webkit-text-stroke-color:white;
        color:black;
        padding: 2rem;
+       margin:1rem, 0rem, 1rem, 0rem;
+     }
+     h1 {
+       -webkit-text-stroke-width: .1rem;
+       color: white;
+     }
+     h3 {
+       padding-left: 1rem;
+       padding-right: 1rem;
+       font-family: courier;
+     }
+     p {
+       font-family: courier;
+       font-size: 1rem;
      }
     nav {
        display: flex;
@@ -26,28 +44,122 @@
        text-decoration: line-through;
        -webkit-text-stroke-width: 1.5px;
        color: transparent;
-       -webkit-text-stroke-color: #59c4c6;
+       font-family: courier;
+       -webkit-text-stroke-color: #f5632f;
      }
      a:hover {
        font-size: 1.25rem;
-       text-decoration: line-through;
        -webkit-text-stroke-color: #59c4c6;
+       -webkit-text-stroke-width: .1rem;
+       color: transparent;
        transition: 0.25s ease;
      }
+     #ordersum {
+      display: flex;
+      padding: 2rem;
+      flex-direction: column;
+      background-color: white;
+     }
+     #oflex{
+       display: flex;
+       flex-direction: row;
+       justify-content: flex-end !important;
+       padding: 1rem;
+       margin: 1rem;
+       border: solid 1px black;
+       font-family: courier;
+       background-color: white;
+     }
+
+    #oflex span {
+      font-family: impact;
+      padding-right: .5rem;
+      color: #f5632f;
+    }
      #flex{
        display: flex;
-       flex-direction: column;
+       flex-direction: row;
+       justify-content: space-between;
+       background-color:white;
+       padding: 1rem;
+       margin: 1rem;
        border-radius: 2rem;
        border: solid 1px black;
-       align-items:center;
-       justify-content: space-around;
-       margin: 1rem;
+
+     }
+     #fleximg{
+       display: flex;
+       flex-direction: row;
+       justify-content: space-between;
        background-color:white;
+       padding-right: 1rem;
+     }
+     #flexq{
+       display: flex;
+       flex-direction: row;
+       background-color:white;
+       justify-content: flex-start;
+     }
+     #cartflex {
+       display: flex;
+       justify-content: space-around;
+     }
+     #flex1 {
+       display: flex;
+       flex-direction: column;
+       justify-content: flex-start;;
+       width: 10rem;
+     }
+     #flex2 {
+       display: flex;
+       flex-direction: column;
+       justify-content: flex-start;
+       padding: 1rem;
+     }
+     #flexprodgrandparent {
+       display: flex;
+       flex-direction: row;
+       flex-wrap: wrap;
+       justify-content: space-around;
+
+     }
+     #flexprodgrandparent>*{
+       display: flex;
+     }
+
+     #flexprodparent img {
+       width: 15rem;
+     }
+     #flexprodparent h1 {
+       font-size:1rem;
+     }
+     #flexprodparent #genre{
+       font-family:courier;
+       text-transform: capitalize;
+       font-weight:700;
+     }
+     #flexprodparent>*{
+       display: flex;
+       flex-direction: column;
+       justify-content: center;
+       margin:3rem;
+       padding:3rem;
+       align-items: center;
+     }
+     #flex3 {
+       display: flex;
+       flex-direction: column;
+       justify-content: flex-start;
      }
      li {
        display: flex;
        flex-direction: row;
-       padding: .75rem;
+       justify-content: flex-start;
+       padding: .5rem;
+     }
+
+     ul {
+       padding: 0 !important;
      }
 
      input{
@@ -61,6 +173,7 @@
 
      button {
        height: 2rem;
+       max-width: 5rem;
        font-size: 1rem;
        margin: .5rem;
        font: impact;
@@ -73,21 +186,47 @@
      }
 
      button:hover {
-       color: #e64a2b;
        -webkit-text-stroke-color: none !important;
-       -webkit-text-stroke-color:#e64a2b;
-       size: 5rem;
+       size: 1px;
+       font-family: courier;
        transition: color 0.25 ease;
+       color: #f5632f;
+     }
+     #flex1 button {
+       max-width: 4rem;
+       justify-content: center;
+     }
+
+     #buttons {
+       justify-content: center;
+     }
+     #quantity {
+       font-size: .2rem;
+       font-family: courier;
+       -webkit-text-stroke-width: 0;
+       color: black;
+       height: 1rem;
+       width: 1rem;
+       display: flex;
+       justify-content: space-around;
+     }
+     #genre {
+       text-transform: uppercase;
+       padding-top: 0 !important;
      }
      select {
        font-family: impact;
-       color:#e64a2b;
+       color: #f5632f;
      }
      #description {
        font-family: courier;
      }
      .login, .register {
        display: flex;
+       justify-content: flex-end;
+       font-size: .75rem;
+     }
+    input, button {
        justify-content: center;
        align-content: center;
        font-size: .75rem;
@@ -104,8 +243,24 @@
        margin: .5rem;
        font-size: .75rem;
      }
+     #checkoutform {
+       margin: 5rem;
+       padding: 2rem;
+       border: 1px solid black;
+     }
+     #checkoutform label, button {
+       margin-left: 0 !important;
+     }
      img {
        max-width: 10rem;
+       border-radius: 1.5rem;
+     }
+     .rowC {
+       display: flex;
+       flex-direction: row;
+       justify-content: space-between;
+       margin: 3rem;
+       padding-left: 0 !important;
      }
   </style>
 </head>

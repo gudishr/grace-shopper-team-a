@@ -64,25 +64,24 @@ router.get('/api/cart', async ( req, res, next ) => {
 
 router.post('/api/cart', async (req, res, next) => {
   try {
-    const item = await Cart.create(req.body)
-    res.status(201).send(item)
+    const item = await Lineitem.create(req.body)
+    const product = await Product.findByPk(item.productId)
+    const asmrtist = Object.assign({product}, item)
+    res.status(201).json({...item, product})
   }
   catch(ex) {
     next(ex)
   }
 });
 
-// router.post('/api/cart', async ( req, res, next ) => {
-//   try {
-//     const product = await Product.findAll({ where: { id: req.body.cartId }})
-//     req.body.cartId = product[0].id
-//     const cart = await Cart.create(req.body, { include: [ Product ] });
-//     res.send(cart);
-//   }
-//   catch(ex) {
-//     next(ex);
-//   }
-// });
+router.get('/api/orders', async(req, res, next) => {
+  res.send(await OrderDetail.findAll())
+})
+
+router.post('/api/orders', async(req, res, next) => {
+  const order = await OrderDetail.create(req.body)
+  res.send(order);
+})
 
 router.put('/api/cart', async ( req, res, next ) => {
   try {

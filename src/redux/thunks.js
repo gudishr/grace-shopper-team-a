@@ -1,4 +1,4 @@
-import { setProducts, setUsers, _createUser, _destroyProduct, setLoginError, setLoginSuccess,setCart, createCart, destroyCart, _createLineItem, update} from './actions.js';
+import { setProducts, setUsers, _createUser, _destroyProduct, setLoginError, setLoginSuccess,setCart, createCart, destroyCart, _createLineItem, update, _createOrder} from './actions.js';
 import axios from 'axios';
 const API = '/api';
 
@@ -70,4 +70,9 @@ const updateThunks = (id, method) => async dispatch => {
   dispatch(update(cart));
 };
 
-export { getProducts, getUsers, createUser, destroyProduct, onLogin, setCartThunks, createCartThunks, destroyCartThunks, updateThunks, createLineItem }
+const createOrder = (payload) => async dispatch => {
+  const order = (await axios.post(`${API}/orders`, payload)).datal;
+  dispatch(_createOrder(order));
+}
+
+export { getProducts, getUsers, createUser, destroyProduct, onLogin, setCartThunks, createCartThunks, destroyCartThunks, updateThunks, createLineItem, createOrder }

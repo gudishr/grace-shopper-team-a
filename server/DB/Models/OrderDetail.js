@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 const conn = require('../conn');
-const { UUID, UUIDV4, INTEGER } = Sequelize;
+const { UUID, UUIDV4, INTEGER, STRING } = Sequelize;
 
 const OrderDetail = conn.define('orderDetail', {
   id: {
@@ -13,6 +13,10 @@ const OrderDetail = conn.define('orderDetail', {
   },
   quantity: {
     type: INTEGER
+  },
+  imageURL: STRING,
+  name: {
+    type: STRING
   }
 });
 
