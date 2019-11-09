@@ -17,11 +17,7 @@ constructor(props) {
 }
 onChange(ev) {
   this.setState({ [ev.target.name] : ev.target.value });
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> otrigueros28-finalFileSplit
 async updateUser(ev) {
   ev.preventDefault();
   const payload = {name: this.state.name, email: this.state.email}
@@ -30,11 +26,7 @@ async updateUser(ev) {
 }
 async componentDidMount() {
   const {data} = await axios.get(`/api/users/${this.props.match.params.id}`)
-<<<<<<< HEAD
   this.setState({user: data, name: data.name, email: data.email})
-=======
-  this.setState({user: data, name: data.name, email: data.email})
->>>>>>> otrigueros28-finalFileSplit
 }
 render() {
   const { user } = this.state;
@@ -45,11 +37,7 @@ render() {
         {
           <form>
             {user.name}<input name='name' value={this.state.name} onChange = { onChange } /> <br/>
-<<<<<<< HEAD
             {user.email}<input name='email' value={this.state.email} onChange = { onChange } />
-=======
-            {user.email}<input name='email' value={this.state.email} onChange = { onChange } />
->>>>>>> otrigueros28-finalFileSplit
             <button onClick = { updateUser } >Edit</button>
           </form>
         }
