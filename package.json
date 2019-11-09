@@ -28,12 +28,13 @@
     "express-session": "^1.17.0",
     "passport": "^0.4.0",
     "pg": "^7.12.1",
+    "react-stripe-checkout": "^2.6.3",
+    "react-stripe-elements": "^5.1.0",
     "sequelize": "^5.21.2",
     "stripe": "^7.11.0",
+    "volleyball": "^1.5.1",
     "webpack": "^4.41.2",
-    "webpack-cli": "^3.3.9",
-    "react-stripe-elements": "^5.1.0",
-    "volleyball": "^1.5.1"
+    "webpack-cli": "^3.3.9"
   },
   "devDependencies": {
     "@babel/core": "^7.6.4",
