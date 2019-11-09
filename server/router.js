@@ -1,6 +1,6 @@
 const express = require('express');
 const db = require('./DB/db');
-const { conn, models: { User, Guest, Product, Payment, Order, OrderDetail, Cart, Lineitem } } = db;
+const { conn, models: { User, Guest, Product, Order, OrderDetail, Cart, Lineitem } } = db;
 const session = require('express-session');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const passport = require('passport');
@@ -31,6 +31,30 @@ router.post('/api/users', async (req, res, next) => {
     next(ex)
   }
 })
+
+router.put('/api/users', async ( req, res, next ) => {
+  try {
+    const instance = await User.findByPk(req.body.id);
+    Object.assign(instance, req.body);
+    instance.save();
+    res.send(instance);
+  }
+  catch(ex) {
+    next(ex)
+  }
+});
+
+router.get('/api/users/:id', async (req, res, next) => {
+  try {
+    const user = await User.findByPk(req.params.id);
+    res.send(user)
+  }
+  catch(ex) {
+    next(ex)
+  }
+});
+
+
 
 router.get('/api/products', async (req, res, next) => {
   try {
@@ -113,30 +137,17 @@ router.delete('/api/cart/:id', async ( req, res, next ) => {
   }
 });
 
-router.get('/orders', (req, res, next) => {
-  Order.findAll({includes: [lineItems]})
+router.get('/api/orders', (req, res, next) => {
+  Order.findAll({includes: [OrderDetail]})
     .then(orders => res.send(orders))
     .catch(next);
 });
-
-// router.get('/api/admin', async ( req, res, next ) => {
-//   console.log('req',req.user);
-//    try {
-//     const admin = await Product.findAll();
-//     res.send(admin);
-//    }
-//    catch(ex) {
-//      next(ex)
-//   }
-// });
-
-
 
 //these lines serialize the user
 passport.serializeUser((user, done) => done(null, user.id))
 passport.deserializeUser(async (id, done) => {
   try {
-    const user = await db.models.user.findByPk(id)
+    const user = await db.models.User.findByPk(id)
     done(null, user)
   } catch (err) {
     done(err)

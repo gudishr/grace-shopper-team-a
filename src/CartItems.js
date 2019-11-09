@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { getProducts, setCartThunks, destroyCartThunks, updateThunks } from '../store';
+import { getProducts, setCartThunks, destroyCartThunks, updateThunks } from './redux/store';
 
 const { Component } = React;
 
@@ -26,13 +26,8 @@ class _CartItems extends Component {
   render() {
 
     const { products, destroy, update } = this.props
-    const { cart } = this.props || []
-    // const items = cart.map( c => {
-    //   return {...c, cart: products.filter(product => c.productId === product.id)};
-    // });
-    console.log('cart', cart)
+    const { cart } = this.props || [];
     return (
-
       <div>
       { cart.length > 0 && (
         <div>

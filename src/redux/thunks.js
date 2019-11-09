@@ -1,4 +1,4 @@
-import { setProducts, setUsers, _createUser, _destroyProduct, setLoginError, setLoginSuccess,setCart, createCart, destroyCart, _createLineItem, update, _createOrder} from './actions.js';
+import { setProducts, setUsers, _createUser, updateUser, _destroyProduct, setLoginError, setLoginSuccess,setCart, createCart, destroyCart, _createLineItem, update, _createOrder, _getOrders} from './actions.js';
 import axios from 'axios';
 const API = '/api';
 
@@ -23,6 +23,11 @@ const createUser = (user)=> {
     dispatch(_createUser(created))
   }
 }
+
+const updateUserThunks = (id, payload) => async dispatch => {
+  const user = (await axios.put(`/api/users`, {id: id, ...payload})).data;
+  dispatch(updateUser(user));
+};
 
 const destroyProduct = (product)=> {
  return async(dispatch)=> {
@@ -71,8 +76,15 @@ const updateThunks = (id, method) => async dispatch => {
 };
 
 const createOrder = (payload) => async dispatch => {
-  const order = (await axios.post(`${API}/orders`, payload)).datal;
+  const order = (await axios.post(`${API}/orders`, payload)).data;
   dispatch(_createOrder(order));
 }
 
-export { getProducts, getUsers, createUser, destroyProduct, onLogin, setCartThunks, createCartThunks, destroyCartThunks, updateThunks, createLineItem, createOrder }
+const getOrders = ()=> {
+  return async(dispatch)=> {
+    const orders = (await axios.get(`${API}/orders`)).data;
+    dispatch(_getOrders(orders))
+  }
+};
+
+export { getProducts, getUsers, createUser, updateUserThunks, destroyProduct, onLogin, setCartThunks, createCartThunks, destroyCartThunks, updateThunks, createLineItem, createOrder, getOrders }

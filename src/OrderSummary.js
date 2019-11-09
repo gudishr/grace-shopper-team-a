@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { getProducts, setCartThunks, destroyCartThunks, updateThunks } from '../store';
+import { getProducts, setCartThunks, destroyCartThunks, updateThunks } from './redux/store';
 
 const { Component } = React;
 
