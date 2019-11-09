@@ -5,7 +5,6 @@ const Product = require('./Models/Product');
 const Order = require('./Models/Order');
 const Lineitem = require('./Models/LineItem');
 const Cart = require('./Models/Cart');
-const ProductDetail = require('./Models/ProductDetail');
 const Guest = require('./Models/Guest');
 const Payment =  require('./Models/Payment');
 const OrderDetail = require('./Models/OrderDetail')
@@ -14,7 +13,6 @@ User.hasMany(Order);
 Order.hasMany(Product);
 Payment.belongsTo(Order);
 OrderDetail.belongsTo(Order);
-// ProductDetail.belongsTo(Product);
 
 OrderDetail.hasMany(Product);
 
@@ -25,8 +23,6 @@ Product.hasMany(Lineitem);
 Lineitem.belongsTo(Product);
 
 
-
-
 module.exports = {
   conn,
   sync,
@@ -34,7 +30,6 @@ module.exports = {
     User,
     Guest,
     Product,
-    // ProductDetail,
     Payment,
     Order,
     OrderDetail,

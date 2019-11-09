@@ -10,20 +10,11 @@ app.use('/dist', express.static(path.join(__dirname, '../dist')));
 app.get('/', (req, res, next)=> {
   res.sendFile(path.join(__dirname, '../index.html'));
 });
+app.get('/styles.css', (req, res, next)=> {
+  res.sendFile(path.join(__dirname, '../styles.css'));
+})
 
 app.use('/', routes);
-
-//Checkout
-
-// app.get('/api/checkout', async ( req, res, next ) => {
-//   try {
-//     const cart = await Lineitem.findAll( { include: [ Product ] });
-//     res.send(cart);
-//   }
-//   catch(ex) {
-//     next(ex)
-//   }
-// });
 
 db.sync()
   .then(() => {
