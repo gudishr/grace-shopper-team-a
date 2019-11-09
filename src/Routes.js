@@ -9,7 +9,7 @@ import Users from './Users'
 import SingleUser from './SingleUser';
 import { Login } from './Login';
 import { Register } from './Register';
-// import Admin from './Admin';
+import Orders from './Orders';
 
 class Routes extends Component {
   render() {
@@ -24,7 +24,7 @@ class Routes extends Component {
         <Route path='/products/:id' component = { SingleProduct } />
         <Route path='/cart' component = { Cart } />
         <Route path='/checkout' component = { MyStoreCheckout } />
-        {/* <Route path='/admin' component = { Admin } /> */}
+        <Route path='/orders' component = { Orders } />
       </Switch>
     );
   }

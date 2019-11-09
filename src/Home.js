@@ -4,6 +4,9 @@ import {connect} from 'react-redux';
 const Home = () => {
   return (
     <div>
+    <h1 id='home'>
+      Welcome!
+    </h1>
     </div>
   );
 }
