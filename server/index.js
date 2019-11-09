@@ -3,17 +3,7 @@ const path = require('path');
 const app = express();
 const db = require('./DB/db');
 const port = process.env.PORT || 3005;
-<<<<<<< HEAD
-const session = require('express-session');
-const SequelizeStore = require('connect-session-sequelize')(session.Store);
-const passport = require('passport');
-const router = require('express').Router();
-// const volleyball = require('volleyball');
-
-// app.use(volleyball);
-=======
 const routes =  require('./router');
->>>>>>> 1e0f6d189a875e8c04839e59541329982986382a
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}))
