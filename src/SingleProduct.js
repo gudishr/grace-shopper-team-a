@@ -9,14 +9,15 @@ constructor(props) {
   super(props);
   this.state = {
     product: {},
-    quantity: 1
+    quantity: null
    };
   this.create = this.create.bind(this);
 }
 async create(ev) {
   const { product } = this.state;
   ev.preventDefault();
-  const payload = {name: product.name, description: product.description, price: product.price, quantity: product.quantity, imageURL: product.imageURL, genre: product.genre, productId: product.id}
+  console.log(this.state)
+  const payload = {name: product.name, description: product.description, price: product.price, quantity: this.state.quantity, imageURL: product.imageURL, genre: product.genre, productId: product.id}
   await this.props.createCart(payload);
 }
 async componentDidMount() {
@@ -26,14 +27,14 @@ async componentDidMount() {
 render() {
   const { product } = this.state;
   return (
-    <div>
-      <div id='flex'>
+    <div id='flexprodgrandparent'>
+      <div id='flexprodparent'>
         {
           <ul>
             <li key='img'><img src ={product.imageURL} /></li>
             <li key='name'>{product.name}</li>
-            <li key='genre'>{product.genre}</li>
-            <li key='price'>{product.price}</li>
+            <li id='genre'>{product.genre}</li>
+            <li id='price'>${product.price}</li>
             <select onChange={ (ev) => this.setState({ quantity : ev.target.value}) }>
             <option>Select Qty</option>
             {[1,2,3,4,5].map(num => <option key={num} value={num}>{num}</option>)}

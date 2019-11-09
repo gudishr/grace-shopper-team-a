@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import {SET_PRODUCTS, DESTROY_PRODUCT, SET_USERS, CREATE_USER, SET_LOGIN_SUCCESS, SET_LOGIN_ERROR, SET_CART, CREATE_CART, DESTROY, UPDATE_CART, CREATE_LINE_ITEM} from './actions.js';
+import { SET_PRODUCTS, DESTROY_PRODUCT, SET_USERS, CREATE_USER, SET_LOGIN_SUCCESS, SET_LOGIN_ERROR, SET_CART, CREATE_CART, DESTROY, UPDATE_CART, CREATE_LINE_ITEM, CREATE_ORDER } from './actions.js';
 
 const reducer = combineReducers({
   products: (state = [], action)=> {
@@ -47,6 +47,13 @@ lineitem: (state = [], action) => {
   switch (action.type) {
     case CREATE_LINE_ITEM:
       return [...state, action.cart];
+  }
+  return state;
+},
+orders: (state = [], action) => {
+  switch (action.type) {
+    case CREATE_ORDER:
+      return [...state, action.order];
   }
   return state;
 }
