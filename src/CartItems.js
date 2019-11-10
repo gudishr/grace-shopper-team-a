@@ -36,24 +36,22 @@ class _CartItems extends Component {
           {
             (cart.map( item =>
                <div key={item.id} id='flex'>
-                <div id='fleximg'>
+                <div id='flex-img'>
                   <Link to={`/products/${item.id}`} activeclassname="active"><li key='img'><img src ={item.product.imageURL}></img></li></Link>
                 </div>
 
-                <div id='cartflex'>
+                <div id='cart-flex'>
 
-                <div id='flex1'>
+                <div id='flex-item-title'>
                   <Link to={`/products/${item.id}`} activeclassname="active"><h1 key='name'>{item.product.name}</h1></Link>
                   <li id='genre'>{item.product.genre}</li>
-
-
                   <button onClick = { () => destroy(item.id) }>Remove</button>
                 </div>
-                <div id='flex2'>
+                <div id='flex-details'>
                   <p key='itemPriceName'>Price</p>
                   <li key='itemPrice'>${item.product.price}</li>
                 </div>
-                <div id='flex2'>
+                <div id='flex-details'>
                   <p key='quantityName'>Quantity</p>
                   <div id='flexq'>
 
@@ -64,7 +62,7 @@ class _CartItems extends Component {
                   </div>
                 </div>
 
-                <div id='flex2'>
+                <div id='flex-details'>
                   <p key='totalPriceName'>Total</p>
 
                   <li key='totalPrice'>${item.product.price*item.quantity}</li>

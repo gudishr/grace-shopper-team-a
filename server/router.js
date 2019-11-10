@@ -98,14 +98,17 @@ router.post('/api/cart', async (req, res, next) => {
   }
 });
 
-router.get('/api/orders', async(req, res, next) => {
-  res.send(await OrderDetail.findAll())
-})
 
 router.post('/api/orders', async(req, res, next) => {
-  const order = await OrderDetail.create(req.body)
+  const order = await Order.create(req.body)
   res.send(order);
 })
+
+router.get('/api/orders', (req, res, next) => {
+  Order.findAll({includes: [OrderDetail]})
+    .then(orders => res.send(orders))
+    .catch(next);
+});
 
 router.put('/api/cart', async ( req, res, next ) => {
   try {
@@ -137,11 +140,7 @@ router.delete('/api/cart/:id', async ( req, res, next ) => {
   }
 });
 
-router.get('/api/orders', (req, res, next) => {
-  Order.findAll({includes: [OrderDetail]})
-    .then(orders => res.send(orders))
-    .catch(next);
-});
+
 
 //these lines serialize the user
 passport.serializeUser((user, done) => done(null, user.id))
