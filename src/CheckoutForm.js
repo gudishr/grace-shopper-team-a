@@ -12,6 +12,7 @@ class _CheckoutForm extends Component {
   }
   postOrder = (ev) => {
     const orders = this.props.cart.map(e => {
+
       return {
         price: e.product.price,
         quantity: e.quantity,
@@ -20,6 +21,7 @@ class _CheckoutForm extends Component {
       }
 
     })
+    console.log(orders)
     Promise.all(orders.map(f => this.props.createOrder(f)))
   }
   handleSubmit = (ev) => {

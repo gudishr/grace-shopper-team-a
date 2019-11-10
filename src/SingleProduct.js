@@ -27,8 +27,8 @@ async componentDidMount() {
 render() {
   const { product } = this.state;
   return (
-    <div id='flexprodgrandparent'>
-      <div id='flexprodparent'>
+    <div id='flex-prod-parent'>
+      <div id='flex-prod-child'>
         {
           <ul>
             <li key='img'><img src ={product.imageURL} /></li>
@@ -40,7 +40,7 @@ render() {
             {[1,2,3,4,5].map(num => <option key={num} value={num}>{num}</option>)}
             </select>
             <button type = 'submit' onClick={this.create}>ADD TO CART</button>
-            <li id='description' key='description'>{product.description}</li>
+            <p>{product.description}</p>
           </ul>
         }
         </div>

@@ -10,9 +10,6 @@ const Order = conn.define('order', {
   },
   price: { //total cost/sale
     type: INTEGER
-  },
-  quantity: {
-    type: INTEGER
   }
 });
 
