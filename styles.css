@@ -45,6 +45,18 @@ a:hover {
   color: transparent;
   transition: 0.25s ease;
 }
+
+#flex{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color:white;
+  padding: 1rem;
+  margin: 1rem;
+  border-radius: 2rem;
+  border: solid 1px black;
+  flex-wrap: wrap;
+}
 #ordersum {
  display: flex;
  padding: 2rem;
@@ -67,22 +79,8 @@ a:hover {
  padding-right: .5rem;
  color: #f5632f;
 }
-#flex{
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  background-color:white;
-  padding: 1rem;
-  margin: 1rem;
-  border-radius: 2rem;
-  border: solid 1px black;
 
-}
 #fleximg{
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  background-color:white;
   padding-right: 1rem;
 }
 #flexq{
@@ -91,56 +89,48 @@ a:hover {
   background-color:white;
   justify-content: flex-start;
 }
-#cartflex {
+#cart-flex {
   display: flex;
-  justify-content: space-around;
+  justify-content: flex-start;
 }
-#flex1 {
+#flex-item-title {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;;
-  width: 10rem;
+  justify-content: flex-start;
 }
-#flex2 {
+#flex-details {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   padding: 1rem;
 }
-#flexprodgrandparent {
+
+
+
+#flex-prod-parent>*{
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-around;
 
 }
-#flexprodgrandparent>*{
-  display: flex;
-}
-
-#flexprodparent img {
-  width: 15rem;
-}
-#flexprodparent h1 {
-  font-size:1rem;
-}
-#flexprodparent #genre{
-  font-family:courier;
-  text-transform: capitalize;
-  font-weight:700;
-}
-#flexprodparent>*{
+#flex-prod-child>*{
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin:3rem;
   padding:3rem;
   align-items: center;
 }
-#flex3 {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
+#flex-prod-child img {
+  width: 15rem;
+}
+#flex-prod-child h1 {
+  font-size:1rem;
+}
+#flex-prod-child #genre{
+  font-family:courier;
+  text-transform: capitalize;
+  font-weight:700;
 }
 li {
   display: flex;
@@ -153,6 +143,14 @@ ul {
   padding: 0 !important;
 }
 
+input, button {
+  justify-content: center;
+  align-content: center;
+  box-sizing: border-box;
+  border: 0.075rem solid #ccc;
+  border-radius: 1.5rem;
+}
+
 input{
   height: 2rem;
   font-size: 1rem;
@@ -160,13 +158,16 @@ input{
   font-family: courier;
   border: 1px;
   border-style: solid;
+  padding: 1.5rem;
 }
 
 button {
   height: 2rem;
-  max-width: 5rem;
+  max-width: 8rem;
   font-size: 1rem;
   margin: .5rem;
+  padding: 1rem;
+  padding-bottom: 1.75rem !important;
   font: impact;
   border: black 1px;
   border-style: solid;
@@ -187,19 +188,19 @@ button:hover {
   max-width: 4rem;
   justify-content: center;
 }
-
-#buttons {
-  justify-content: center;
-}
 #quantity {
+
   font-size: .2rem;
+  padding: .75rem !important;
+  border-radius: 50%;
   font-family: courier;
   -webkit-text-stroke-width: 0;
   color: black;
   height: 1rem;
   width: 1rem;
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
+  margin: 0 !important
 }
 #genre {
   text-transform: uppercase;
@@ -209,21 +210,17 @@ select {
   font-family: impact;
   color: #f5632f;
 }
-#description {
+p {
   font-family: courier;
 }
 .login, .register {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-around;
   font-size: .75rem;
-}
-input, button {
-  justify-content: center;
-  align-content: center;
-  font-size: .75rem;
+  margin: 2rem;
+  padding: 2rem;
   box-sizing: border-box;
   border: 0.075rem solid #ccc;
-  padding: 1.5rem;
   border-radius: 1.5rem;
 }
 .login input, button, .register input, button {
@@ -231,16 +228,12 @@ input, button {
   justify-content: center;
   height: 1.5rem;
   width: 20rem;
-  margin: .5rem;
   font-size: .75rem;
 }
 #checkoutform {
-  margin: 5rem;
+  margin: 4rem;
   padding: 2rem;
   border: 1px solid black;
-}
-#checkoutform label, button {
-  margin-left: 0 !important;
 }
 img {
   max-width: 10rem;
@@ -249,6 +242,7 @@ img {
 .rowC {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   justify-content: space-between;
   margin: 3rem;
   padding-left: 0 !important;

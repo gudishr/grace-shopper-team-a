@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { createUser } from './redux/store.js';
+import { Link } from 'react-router-dom';
 
 class _Register extends React.Component{
   constructor(){
@@ -35,6 +36,7 @@ class _Register extends React.Component{
           <div><label>Email Address</label><input name="email" type="email" placeholder="enter email address" value={ email } onChange={ onChange } required/></div>
           <div><label>Choose a password</label><input name="password" type="password" placeholder="choose a password" value={ password } onChange={ onChange } required/></div>
           <button className="onRegister">Register</button>
+          <p>Already have an account? Login <Link to={'/login'}>here</Link>.</p>
         </form>
       </div>
     );
