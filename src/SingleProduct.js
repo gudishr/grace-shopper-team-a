@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { getProducts, createCartThunks } from './redux/store.js';
+import { getProducts, createLineItemThunks } from './redux/store.js';
 const { Component } = React;
 
 class _SingleProduct extends Component {
@@ -13,13 +13,14 @@ constructor(props) {
    };
   this.create = this.create.bind(this);
 }
-async create(ev) {
+
+create(ev) {
   const { product } = this.state;
   ev.preventDefault();
-  console.log(this.state)
-  const payload = {name: product.name, description: product.description, price: product.price, quantity: this.state.quantity, imageURL: product.imageURL, genre: product.genre, productId: product.id}
-  await this.props.createCart(payload);
+  const payload = { itemPrice: product.price, quantity: this.state.quantity, productId: product.id}
+  this.props.createLineItem(payload);
 }
+
 async componentDidMount() {
   const {data} = await axios.get(`/api/products/${this.props.match.params.id}`)
   this.setState({product: data})
@@ -57,7 +58,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = {
   getProducts: getProducts,
-  createCart: createCartThunks
+  createLineItem: createLineItemThunks
 }
 
 const SingleProduct = connect(mapStateToProps, mapDispatchToProps)(_SingleProduct);

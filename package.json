@@ -1,57 +1,61 @@
 {
-  "name": "grace-shopper-team-a",
+  "name": "grace-shopper-playback",
   "version": "1.0.0",
-  "description": "",
+  "engines": {
+    "node": "10.10.0"
+  },
+  "description": "Playback",
   "main": "index.js",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/officiallyakshay/grace-shopper-team-a.git"
+  "scripts": {
+    "build": "webpack --mode=production",
+    "webpack": "webpack --watch --mode=development",
+    "start:dev": "nodemon server/index.js --ignore dist/ --ignore src/ & npm run webpack",
+    "start": "node server/index.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/officiallyakshay/grace-shopper-team-a/issues"
+  "babel": {
+    "presets": [
+      "@babel/preset-react"
+    ],
+    "plugins": [
+      "@babel/plugin-proposal-class-properties"
+    ]
   },
-  "homepage": "https://github.com/officiallyakshay/grace-shopper-team-a#readme",
   "dependencies": {
-    "axios": "^0.19.0",
+    "connect-session-sequelize": "^6.0.0",
     "express": "^4.17.1",
     "express-session": "^1.17.0",
+    "passport": "^0.4.0",
     "pg": "^7.12.1",
-    "react-redux": "^7.1.1",
-    "react-router-dom": "^5.1.2",
+    "sequelize": "^5.21.2",
+    "stripe": "^7.11.0",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.9",
     "react-stripe-elements": "^5.1.0",
-    "redux": "^4.0.4",
-    "redux-thunk": "^2.3.0",
-    "sequelize": "^5.21.1",
     "volleyball": "^1.5.1"
   },
   "devDependencies": {
     "@babel/core": "^7.6.4",
     "@babel/plugin-proposal-class-properties": "^7.5.5",
     "@babel/preset-react": "^7.6.3",
+    "axios": "^0.19.0",
     "babel-loader": "^8.0.6",
-    "connect-session-sequelize": "^6.0.0",
-    "passport": "^0.4.0",
+    "nodemon": "^1.19.4",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
-    "webpack": "^4.41.2",
-    "webpack-cli": "^3.3.9"
+    "react-redux": "^7.1.1",
+    "react-router-dom": "^5.1.2",
+    "redux": "^4.0.4",
+    "redux-thunk": "^2.3.0"
   },
-  "scripts": {
-    "postinstall": "npm run webpack",
-    "webpack": "webpack",
-    "webpack:dev": "webpack --watch --mode=development",
-    "start:dev": " nodemon server/index.js --ignore dist/ --ignore src/ & npm run webpack:dev",
-    "start": "node server/index.js"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gudishr/grace-shopper-team-a.git"
   },
-  "babel": {
-    "presets": [
-      "@babel/react"
-    ],
-    "plugins": [
-      "@babel/plugin-proposal-class-properties"
-    ]
-  }
+  "bugs": {
+    "url": "https://github.com/gudishr/grace-shopper-team-a/issues"
+  },
+  "homepage": "https://github.com/gudishr/grace-shopper-team-a#readme"
 }

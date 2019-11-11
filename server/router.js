@@ -1,12 +1,14 @@
 const express = require('express');
 const db = require('./DB/db');
-const { conn, models: { User, Guest, Product, Order, OrderDetail, Cart, Lineitem } } = db;
+const { conn, models: { User, Product, Order, Lineitem } } = db;
 const session = require('express-session');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const passport = require('passport');
 const router = express.Router();
 
 router.use(express.json());
+
+// USERS //
 
 router.get('/api/users', async (req, res, next) => {
   try {
@@ -54,7 +56,7 @@ router.get('/api/users/:id', async (req, res, next) => {
   }
 });
 
-
+// PRODUCTS //
 
 router.get('/api/products', async (req, res, next) => {
   try {
@@ -76,41 +78,29 @@ router.get('/api/products/:id', async (req, res, next) => {
   }
 });
 
-router.get('/api/cart', async ( req, res, next ) => {
+// LINEITEMS //
+
+router.get('/api/lineitem', async ( req, res, next ) => {
   try {
-    const cart = await Lineitem.findAll( { include: [ Product ] });
-    res.send(cart);
+    const lineitems = await Lineitem.findAll( { include: [ Product ] });
+    res.send(lineitems);
   }
   catch(ex) {
     next(ex)
   }
 });
 
-router.post('/api/cart', async (req, res, next) => {
+router.delete('/api/lineitem/:id', async ( req, res, next ) => {
   try {
-    const item = await Lineitem.create(req.body)
-    const product = await Product.findByPk(item.productId)
-    const asmrtist = Object.assign({product}, item)
-    res.status(201).json({...item, product})
+    await Lineitem.destroy({ where: {id: req.params.id} });
+    res.sendStatus(201);
   }
   catch(ex) {
-    next(ex)
+    next(ex);
   }
 });
 
-
-router.post('/api/orders', async(req, res, next) => {
-  const order = await Order.create(req.body)
-  res.send(order);
-})
-
-router.get('/api/orders', (req, res, next) => {
-  Order.findAll({includes: [OrderDetail]})
-    .then(orders => res.send(orders))
-    .catch(next);
-});
-
-router.put('/api/cart', async ( req, res, next ) => {
+router.put('/api/lineitem', async ( req, res, next ) => {
   try {
     const instance = await Lineitem.findByPk(req.body.id, {include: [Product]});
     if (req.body.method === 'add') {
@@ -128,19 +118,20 @@ router.put('/api/cart', async ( req, res, next ) => {
   }
 });
 
-//cartID to send in for validation
+// ORDERS //
 
-router.delete('/api/cart/:id', async ( req, res, next ) => {
-  try {
-    await Cart.destroy({ where: {id: req.params.id} });
-    res.sendStatus(201);
-  }
-  catch(ex) {
-    next(ex);
-  }
+router.post('/api/orders', async(req, res, next) => {
+  const order = await Order.create(req.body)
+  res.send(order);
+})
+
+router.get('/api/orders', (req, res, next) => {
+  Order.findAll()
+    .then(orders => res.send(orders))
+    .catch(next);
 });
 
-
+// AUTHENTICATION //
 
 //these lines serialize the user
 passport.serializeUser((user, done) => done(null, user.id))
@@ -208,8 +199,26 @@ router.post('/api/register', (req, res, next)=>{
 ////logout button link, deletes session and sends back to home
 router.delete('/api/logout', (req, res, next) => {
   req.logout();
-  req.session.destroy();
   res.redirect('/api/');
+});
+
+router.post('/api/lineitem', async (req, res, next) => {
+  try {
+    if(req.user){
+      let order = Order.findOne({ where: { purchased: false, userId: req.user.dataValues.id } })
+      if (!order) {
+        order = await Order.create({ purchased: false, userId: req.user.dataValues.id })   
+      }
+
+      const item = await Lineitem.create({...req.body, orderId : order.id})
+      const product = await Product.findByPk(item.productId)
+      const lineitem = {...item.dataValues, product}  
+      res.status(201).send(lineitem)
+    }
+  }
+  catch(ex) {
+    next(ex)
+  }
 });
 
 router.get('/api/me', (req, res, next)=>{
