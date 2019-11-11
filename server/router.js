@@ -105,7 +105,7 @@ router.post('/api/orders', async(req, res, next) => {
 })
 
 router.get('/api/orders', (req, res, next) => {
-  Order.findAll({includes: [OrderDetail]})
+  Order.findAll({includes: [Lineitem]})
     .then(orders => res.send(orders))
     .catch(next);
 });

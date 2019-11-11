@@ -9,6 +9,8 @@ const Guest = require('./Models/Guest');
 
 User.hasMany(Order);
 Order.hasMany(Product);
+Lineitem.belongsTo(Order);
+Order.hasMany(Lineitem);
 
 Cart.belongsTo(User);
 Cart.hasMany(Lineitem);
