@@ -199,7 +199,6 @@ router.post('/api/register', (req, res, next)=>{
 ////logout button link, deletes session and sends back to home
 router.delete('/api/logout', (req, res, next) => {
   req.logout();
-  req.session.destroy();
   res.redirect('/api/');
 });
 
