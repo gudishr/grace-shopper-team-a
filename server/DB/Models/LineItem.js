@@ -1,6 +1,7 @@
 const Sequelize = require('sequelize');
 const conn = require('../conn')
-const { STRING, UUID, UUIDV4, INTEGER} = Sequelize;
+const Product = require('./Product');
+const { STRING, UUID, UUIDV4, INTEGER, DECIMAL} = Sequelize;
 
 const Lineitem = conn.define('lineitem', {
   name: STRING,
@@ -15,6 +16,9 @@ const Lineitem = conn.define('lineitem', {
       min : 1
     }
   },
+  itemPrice: {
+    type: DECIMAL
+  }
 });
 
 module.exports = Lineitem;

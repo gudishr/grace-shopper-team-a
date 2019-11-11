@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 const conn = require('../conn')
-const { UUID, UUIDV4, INTEGER } = Sequelize;
+const { UUID, UUIDV4, DECIMAL, BOOLEAN } = Sequelize;
 
 const Order = conn.define('order', {
   id: {
@@ -9,7 +9,11 @@ const Order = conn.define('order', {
     defaultValue: UUIDV4,
   },
   price: { //total cost/sale
-    type: INTEGER
+    type: DECIMAL
+  },
+  purchased: {
+    type: BOOLEAN,
+    defaultValue: false
   }
 });
 

@@ -1,4 +1,4 @@
-import { setProducts, setUsers, _createUser, updateUser, _destroyProduct, setLoginError, setLoginSuccess,setCart, createCart, destroyCart, _createLineItem, update, _createOrder, _getOrders} from './actions.js';
+import { setProducts, setUsers, _createUser, updateUser, _destroyProduct, setLoginError, setLoginSuccess, setLineItem, createLineItem, destroyLineItem, update, _createOrder, _getOrders } from './actions.js';
 import axios from 'axios';
 const API = '/api';
 
@@ -48,31 +48,25 @@ const onLogin = (user) => {
   }
 }
 
-const setCartThunks = () => async dispatch => {
-  const cart = (await axios.get('/api/cart')).data;
-  dispatch(setCart(cart));
+const setLineItemThunks = () => async dispatch => {
+  const lineitem = (await axios.get('/api/lineitem')).data;
+  dispatch(setLineItem(lineitem));
 };
 
-const createCartThunks = (payload) => async dispatch => {
-  const cart = (await axios.post('/api/cart', payload)).data;
-  dispatch(createCart(cart));
+const createLineItemThunks = (payload) => async dispatch => {
+  console.log("in thunk", payload)
+  const lineitem = (await axios.post('/api/lineitem', payload)).data;
+  dispatch(createLineItem(lineitem));
 }
 
-const destroyCartThunks = (id) => async dispatch => {
-  await axios.delete(`/api/cart/${id}`);
-  dispatch(destroyCart(id));
-};
-
-const createLineItem = ()=> {
-  return async(dispatch)=> {
-    const created = (await axios.post(`${API}/cart`, lineitem)).data;
-    dispatch(_createLineItem(created));
-  }
+const destroyLineItemThunks = (id) => async dispatch => {
+  await axios.delete(`/api/lineitem/${id}`);
+  dispatch(destroyLineItem(id));
 };
 
 const updateThunks = (id, method) => async dispatch => {
-  const cart = (await axios.put(`/api/cart`, {id: id, method})).data;
-  dispatch(update(cart));
+  const lineitem = (await axios.put(`/api/lineitem`, {id: id, method})).data;
+  dispatch(update(lineitem));
 };
 
 const createOrder = (payload) => async dispatch => {
@@ -87,4 +81,4 @@ const getOrders = ()=> {
   }
 };
 
-export { getProducts, getUsers, createUser, updateUserThunks, destroyProduct, onLogin, setCartThunks, createCartThunks, destroyCartThunks, updateThunks, createLineItem, createOrder, getOrders }
+export { getProducts, getUsers, createUser, updateUserThunks, destroyProduct, onLogin, setLineItemThunks, createLineItemThunks, destroyLineItemThunks, updateThunks, createOrder, getOrders }
