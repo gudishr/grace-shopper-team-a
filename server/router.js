@@ -208,7 +208,7 @@ router.post('/api/lineitem', async (req, res, next) => {
     if(req.user){
       let order = Order.findOne({ where: { purchased: false, userId: req.user.dataValues.id } })
       if (!order) {
-        order = await Order.create({ purchased: false })   
+        order = await Order.create({ purchased: false, userId: req.user.dataValues.id })   
       }
 
       const item = await Lineitem.create({...req.body, orderId : order.id})
