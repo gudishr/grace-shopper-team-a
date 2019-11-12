@@ -10,18 +10,6 @@ class _CheckoutForm extends Component {
   constructor() {
     super();
   }
-  postOrder = (ev) => {
-    const orders = this.props.cart.map(e => {
-      return {
-        price: e.product.price,
-        quantity: e.quantity,
-        imageURL: e.product.imageURL,
-        name: e.product.name
-      }
-
-    })
-    Promise.all(orders.map(f => this.props.createOrder(f)))
-  }
   handleSubmit = (ev) => {
     ev.preventDefault();
     this.props.stripe
@@ -39,17 +27,17 @@ class _CheckoutForm extends Component {
     return (
       <form id='checkoutform' onSubmit={ this.handleSubmit }>
         <CardSection />
-        <button onClick = {this.postOrder}>Submit</button>
+        <button>Submit</button>
       </form>
     );
   }
 }
 
-const mapStateToProps = ({ cart }) => ({ cart })
+const mapStateToProps = ({ lineitem }) => ({ lineitem })
 
 const mapDispatchToProps= (dispatch) => {
   return {
-    setCartThunks: () => dispatch(setCartThunks()),
+    setLineItemThunks: () => dispatch(setLineItemThunks()),
     createOrder: (order) => dispatch(createOrder(order))
   }
 }

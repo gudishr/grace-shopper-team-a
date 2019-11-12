@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { onLogin } from './redux/store.js';
+import { Link } from 'react-router-dom';
 
 class _Login extends React.Component{
   constructor(){
@@ -27,6 +28,7 @@ class _Login extends React.Component{
           <div><label>Email Address</label><input name="email" type="email" placeholder="enter your reistered email id" value={ email } onChange={ onChange } required/></div>
           <div><label>Password</label><input name="password" type="password" placeholder="enter your password" value={ password } onChange={ onChange } required/></div>
           <button className="onLogin">Login</button>
+          <p>Don't have an account? Register <Link to={'/register'}>here</Link>.</p>
         </form>
       </div>
     );

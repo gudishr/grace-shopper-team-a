@@ -1,12 +1,11 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import {Login} from './Login';
 
 const Home = () => {
   return (
     <div>
-    <h1 id='home'>
-      Welcome!
-    </h1>
+      <div>< Login /></div>
     </div>
   );
 }

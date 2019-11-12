@@ -15,19 +15,20 @@ class _Products extends Component {
  render() {
    const {products} = this.props
    return (
-     <div id='flexprodgrandparent'>
+     <div id='flex-prod-parent'>
        <ul>
          {
            products.map( product => {
              return (
-               <div key={product.id} id='flexprodparent'>
+               <div key={product.id} id='flex-prod-child'>
                   {/* <Link to={`/products/${product.id}`} activeclassname="active"> */}
-                  <div id='flexprodchild'>
+                  <div>
 
                   <li key='img'><img src ={product.imageURL}></img></li>
 
                   {/* </Link> */}
                   <Link to={`/products/${product.id}`} activeclassname="active"><h1 key='name'>{product.name}</h1></Link>
+                  <li id='artist'>{product.artist}</li>
                   <li id='genre'>{product.genre}</li>
                   <li id='price'>${product.price}</li>
                   </div>

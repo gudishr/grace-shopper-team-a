@@ -25,5 +25,8 @@ typings/
 # next.js build output
 .next
 
-# /dist/main.js
-# /dist/main.js.map
+#DS Store -- automatic desktop service store
+.DS_Store
+
+/dist/main.js
+/dist/main.js.map

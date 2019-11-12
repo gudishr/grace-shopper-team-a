@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { getProducts, setCartThunks, destroyCartThunks, updateThunks } from './redux/store';
+import { getProducts, setLineItemThunks, destroyLineItemThunks, updateThunks } from './redux/store';
 
 const { Component } = React;
 
@@ -21,39 +21,37 @@ class _CartItems extends Component {
   }
   async componentDidMount() {
     await this.props.getProducts();
-    await this.props.setCart();
+    await this.props.setLineItem();
   }
   render() {
 
     const { products, destroy, update } = this.props
-    const { cart } = this.props || [];
+    const { lineitem } = this.props || [];
     return (
       <div>
-      { cart.length > 0 && (
+      { lineitem.length > 0 && (
         <div>
-        <h3>Cart Items: { cart.length }</h3>
+        <h3>Cart Items: { lineitem.length }</h3>
         <ul>
           {
-            (cart.map( item =>
+            (lineitem.map( item =>
                <div key={item.id} id='flex'>
-                <div id='fleximg'>
+                <div id='flex-img'>
                   <Link to={`/products/${item.id}`} activeclassname="active"><li key='img'><img src ={item.product.imageURL}></img></li></Link>
                 </div>
 
-                <div id='cartflex'>
+                <div id='cart-flex'>
 
-                <div id='flex1'>
+                <div id='flex-item-title'>
                   <Link to={`/products/${item.id}`} activeclassname="active"><h1 key='name'>{item.product.name}</h1></Link>
                   <li id='genre'>{item.product.genre}</li>
-
-
                   <button onClick = { () => destroy(item.id) }>Remove</button>
                 </div>
-                <div id='flex2'>
+                <div id='flex-details'>
                   <p key='itemPriceName'>Price</p>
                   <li key='itemPrice'>${item.product.price}</li>
                 </div>
-                <div id='flex2'>
+                <div id='flex-details'>
                   <p key='quantityName'>Quantity</p>
                   <div id='flexq'>
 
@@ -64,7 +62,7 @@ class _CartItems extends Component {
                   </div>
                 </div>
 
-                <div id='flex2'>
+                <div id='flex-details'>
                   <p key='totalPriceName'>Total</p>
 
                   <li key='totalPrice'>${item.product.price*item.quantity}</li>
@@ -86,14 +84,14 @@ class _CartItems extends Component {
 const mapStateToProps = state => {
   return {
     products: state.products,
-    cart: state.cart
+    lineitem: state.lineitem
   }
 }
 
 const mapDispatchToProps = {
   getProducts: getProducts,
-  setCart: setCartThunks,
-  destroy: destroyCartThunks,
+  setLineItem: setLineItemThunks,
+  destroy: destroyLineItemThunks,
   update: updateThunks
 }
 

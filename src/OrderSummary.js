@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { getProducts, setCartThunks, destroyCartThunks, updateThunks } from './redux/store';
+import { getProducts, setLineItemThunks, destroyLineItemThunks, updateThunks } from './redux/store';
 
 const { Component } = React;
 
@@ -21,11 +21,11 @@ class _OrderSummary extends Component {
   }
   async componentDidMount() {
     await this.props.getProducts();
-    await this.props.setCart();
+    await this.props.setLineItem();
   }
   render() {
-    const { products, cart } = this.props
-    const subTotal = cart.reduce((acc, cv) => {
+    const { products, lineitem } = this.props
+    const subTotal = lineitem.reduce((acc, cv) => {
       acc += cv.product.price*cv.quantity
       return acc
     }, 0)
@@ -54,14 +54,14 @@ class _OrderSummary extends Component {
 const mapStateToProps = state => {
   return {
     products: state.products,
-    cart: state.cart
+    lineitem: state.lineitem
   }
 }
 
 const mapDispatchToProps = {
   getProducts: getProducts,
-  setCart: setCartThunks,
-  destroy: destroyCartThunks,
+  setLineItem: setLineItemThunks,
+  destroy: destroyLineItemThunks,
   update: updateThunks
 }
 
