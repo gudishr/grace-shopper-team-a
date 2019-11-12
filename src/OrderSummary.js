@@ -41,8 +41,6 @@ class _OrderSummary extends Component {
                     <li><span>Sub Total: </span>${subTotal}</li>
                     <li><span>Tax: </span>${tax}</li>
                     <li><span>TOTAL: </span>${total}</li>
-
-                    <Link to={`/checkout`}><button>Checkout</button></Link>
                 </div>
               </div>
         </ul>
