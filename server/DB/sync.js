@@ -32,7 +32,7 @@ const sync = async () => {
 
   ]
 
-  const [ Scorpion, GKMC, BC, Vintage1, Vintage2, Vintage3, Vintage4, Retro1, Retro2, Retro3] = await Promise.all(products.map( product => Product.create(product)));
+  const [ ledZeppelin, loaded, doolittle, speakingTongues, thrust, areYouExperienced, exileOnMainStreet, ziggyStardust, theWall] = await Promise.all(products.map( product => Product.create(product)));
 
   const orders = [
     {price: 85.8, userId: Alexandra.id, purchased: true}, //2 scorpions - done
@@ -44,12 +44,9 @@ const sync = async () => {
   const [ order1, order2, order3, order4 ] = await Promise.all(orders.map( order => Order.create(order)));
 
   const lineitems =[
-    {quantity : 2, productId : Scorpion.id, orderId : order1.id},
-    {quantity : 1, productId : Vintage1.id, orderId : order2.id},
-    {quantity : 1, productId : Vintage2.id, orderId : order2.id},
-    {quantity : 1, productId : Retro1.id, orderId : order3.id},
-    {quantity : 1, productId : Scorpion.id, orderId : order4.id},
-    {quantity : 1, productId : BC.id, orderId : order4.id}
+    {quantity : 2, productId : thrust.id, orderId : order2.id},
+    {quantity : 1, productId : loaded.id, orderId : order2.id},
+    {quantity : 1, productId : theWall.id, orderId : order4.id}
   ]
 
   await Promise.all(lineitems.map( item => Lineitem.create(item)));
