@@ -21,7 +21,6 @@ class _Orders extends Component {
                 <img src={order.imageURL}></img>
                 {order.name}
                 Order #: {order.id}<br />
-                Lineitem: {order.lineitem}<br />
                 Order Total: ${order.total}<br />
                 User: {order.userId}
                 <br /> <br />

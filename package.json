@@ -7,10 +7,9 @@
   "description": "Playback",
   "main": "index.js",
   "scripts": {
-    "build": "webpack --mode=production",
-    "webpack": "webpack --watch --mode=development",
+    "webpack": "webpack --mode=production",
     "start:dev": "nodemon server/index.js --ignore dist/ --ignore src/ & npm run webpack",
-    "start": "node server/index.js"
+    "start": "npm run webpack &node server/index.js"
   },
   "keywords": [],
   "author": "",
@@ -30,12 +29,12 @@
     "passport": "^0.4.0",
     "pg": "^7.12.1",
     "react-stripe-checkout": "^2.6.3",
+    "react-stripe-elements": "^5.1.0",
     "sequelize": "^5.21.2",
     "stripe": "^7.11.0",
+    "volleyball": "^1.5.1",
     "webpack": "^4.41.2",
-    "webpack-cli": "^3.3.9",
-    "react-stripe-elements": "^5.1.0",
-    "volleyball": "^1.5.1"
+    "webpack-cli": "^3.3.9"
   },
   "devDependencies": {
     "@babel/core": "^7.6.4",
