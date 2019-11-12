@@ -36,12 +36,13 @@ render() {
             <li key='name'>{product.name}</li>
             <li id='genre'>{product.genre}</li>
             <li id='price'>${product.price}</li>
+            <p>{product.description}</p>
             <select onChange={ (ev) => this.setState({ quantity : ev.target.value}) }>
             <option>Select Qty</option>
             {[1,2,3,4,5].map(num => <option key={num} value={num}>{num}</option>)}
             </select>
             <button type = 'submit' onClick={this.create}>ADD TO CART</button>
-            <p>{product.description}</p>
+
           </ul>
         }
         </div>

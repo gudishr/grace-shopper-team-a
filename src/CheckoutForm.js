@@ -10,7 +10,6 @@ class _CheckoutForm extends Component {
   constructor() {
     super();
   }
-
   handleSubmit = (ev) => {
     ev.preventDefault();
     this.props.stripe

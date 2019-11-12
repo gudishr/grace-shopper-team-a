@@ -207,12 +207,12 @@ router.post('/api/lineitem', async (req, res, next) => {
     if(req.user){
       let order = Order.findOne({ where: { purchased: false, userId: req.user.dataValues.id } })
       if (!order) {
-        order = await Order.create({ purchased: false, userId: req.user.dataValues.id })   
+        order = await Order.create({ purchased: false, userId: req.user.dataValues.id })
       }
 
       const item = await Lineitem.create({...req.body, orderId : order.id})
       const product = await Product.findByPk(item.productId)
-      const lineitem = {...item.dataValues, product}  
+      const lineitem = {...item.dataValues, product}
       res.status(201).send(lineitem)
     }
   }

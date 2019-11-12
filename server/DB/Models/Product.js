@@ -29,8 +29,9 @@ const Product = conn.define('product', {
     defaultValue: 'https://i.pinimg.com/736x/6d/82/a5/6d82a57b6268a57a4b46d6ece3ea7f3d--vintage-music-vintage-stuff.jpg'
   },
   genre: {
-    type: ENUM('Rap', 'Rock', 'R&B', 'Alternative', 'Metal', 'Classic', 'Retro')
-  }
+    type: ENUM('Rap', 'Rock', 'R&B', 'Alternative', 'Metal', 'Classic', 'Retro', 'Jazz', 'New Wave')
+  },
+  artist: STRING
 });
 
 module.exports = Product;
