@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { SET_PRODUCTS, DESTROY_PRODUCT, SET_USERS, CREATE_USER, UPDATE_USER, SET_LOGIN_SUCCESS, SET_LOGIN_ERROR, SET_CART, CREATE_CART, DESTROY, UPDATE_CART, CREATE_LINE_ITEM, CREATE_ORDER, GET_ORDERS } from './actions.js';
+import { SET_PRODUCTS, DESTROY_PRODUCT, SET_USERS, CREATE_USER, UPDATE_USER, SET_LOGIN_SUCCESS, SET_LOGIN_ERROR, SET_LINEITEM, CREATE_LINEITEM, DESTROY, CREATE_ORDER, GET_ORDERS, UPDATE_LINEITEM } from './actions.js';
 
 const reducer = combineReducers({
   products: (state = [], action)=> {
@@ -32,26 +32,19 @@ login: (state = [], action)=> {
   }
   return state;
 },
-cart: (state = [], action) => {
+lineitem: (state = [], action) => {
   switch (action.type) {
-    case SET_CART:
-        return action.cart;
-    case CREATE_CART:
-        return [...state, action.cart];
+    case SET_LINEITEM:
+        return action.lineitem;
+    case CREATE_LINEITEM:
+        return [...state, action.lineitem];
     case DESTROY:
-        return state.filter(cart => cart.id !== action.cart);
-    case UPDATE_CART:
-        return state.map(cart => cart.id === action.cart.id ? action.cart : cart)
+        return state.filter(lineitem => lineitem.id !== action.lineitem);
+    case UPDATE_LINEITEM:
+        return state.map(lineitem => lineitem.id === action.lineitem.id ? action.lineitem : lineitem)
     default:
         return state
   }
-},
-lineitem: (state = [], action) => {
-  switch (action.type) {
-    case CREATE_LINE_ITEM:
-      return [...state, action.cart];
-  }
-  return state;
 },
 orders: (state = [], action) => {
   switch (action.type) {

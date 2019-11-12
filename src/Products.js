@@ -28,6 +28,7 @@ class _Products extends Component {
 
                   {/* </Link> */}
                   <Link to={`/products/${product.id}`} activeclassname="active"><h1 key='name'>{product.name}</h1></Link>
+                  <li id='artist'>{product.artist}</li>
                   <li id='genre'>{product.genre}</li>
                   <li id='price'>${product.price}</li>
                   </div>

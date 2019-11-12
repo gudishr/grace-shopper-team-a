@@ -237,7 +237,6 @@ p {
 }
 img {
   max-width: 10rem;
-  border-radius: 1.5rem;
 }
 .rowC {
   display: flex;
